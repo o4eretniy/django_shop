@@ -19,16 +19,18 @@
     </div>
     <div id="main" class="product_list col-sm-9">
         <h1>{% if category %}{{ category.name }}{% else %}Товары{% endif %}</h1>
+        <div class="gall">
         <div class="items row">
             {% for product in products %}
                 <div class="item col-sm-4">
                     <a href="{{ product.get_absolute_url}}">
-                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image.jpg"%}{% endif %}" class="img-responsive">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image.jpg"%}{% endif %}" width='150' height='225' class="img-responsive">
                     </a>
                     <a href="{{ product.get_absolute_url}}">{{ product.name }}</a><br>
                     {{ product.price }} руб.
                 </div>
             {% endfor %}
+        </div>
         </div>
     </div>
 {% endblock %}</code>
