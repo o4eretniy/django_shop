@@ -10,8 +10,8 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'    
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'    
 
     def __str__(self):
         return self.name
@@ -22,16 +22,16 @@ class Category(models.Model):
 # Product model
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products',
-        verbose_name='Категория', on_delete=models.PROTECT)
+        verbose_name='Category', on_delete=models.PROTECT)
     name = models.CharField(max_length=200, db_index=True,
-        verbose_name='Название')
+        verbose_name='Name')
     slug = models.SlugField(max_length=200, db_index=True)
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True, 
-        verbose_name='Изображение товара')
-    description = models.TextField(blank=True, verbose_name='Описание')
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
-    stock = models.PositiveIntegerField(verbose_name='На складе')
-    available = models.BooleanField(default=True, verbose_name='Доступен')
+        verbose_name='Item Image')
+    description = models.TextField(blank=True, verbose_name='Description')
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Price')
+    stock = models.PositiveIntegerField(verbose_name='In stock')
+    available = models.BooleanField(default=True, verbose_name='Available')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

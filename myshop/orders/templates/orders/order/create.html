@@ -1,28 +1,35 @@
 {% extends 'shop/base.html' %}
 
 {% block title %}
-    Оформление заказа
+    Order formalization
 {% endblock  %}
 
 {% block content %}
-    <h1>Оформление заказа</h1>
+    <h1>Order formalization</h1>
     <div class="col-sm-4">
-        <h2>Заполните форму</h2>
+        <h2>Fill the form</h2>
         <form class='order-form' action='.' method="POST">
             {{ form.as_p }}
             {% csrf_token %}
-            <input type="submit" value="Отправить">
+            <input type="submit" value="Send">
         </form>
     </div>
 
     <div class='order-info col-sm-8'>
-        <h2>Ваш заказ</h2>
+        <h2>Your order</h2>
         <ul>
             {% for item in cart %}
                 <li>
-                    {{ item.product.name }} | Количество: {{ item.quantity }} | Цена: {{ item.total_price}}
+                    {{ item.product.name }} | Quantity: {{ item.quantity }} | Price: {{ item.total_price}}
                 </li>
             {% endfor %}
+            {% if cart.cupon %}
+                <li>
+                    "{{ cart.cupon.code }}" ({{ cart.cupon.discount }}% discount)
+                    <span> - {{ cart.get_discount|floatformat:"2"}} $</span>
+                </li>
+            {% endif %}
         </ul>
+        <p><strong>Total:</strong> {{ cart.get_total_price_after_discount|floatformat:"2"}} $</p>
     </div>
 {% endblock  %}

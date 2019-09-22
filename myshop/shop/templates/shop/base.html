@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='ru'>
 <head>
     <meta charset='UTF-8'>
     <title>{% block title %}{% endblock %}</title>
@@ -27,6 +27,7 @@
             max-width: 100%;
             height: 100px;
         }
+        A.link1 { font-size: 24px;}
     </style>
     
     <!-- Styles -->
@@ -36,19 +37,20 @@
 <body>
     <section id='header'>
         <div class='top container'>
-            Мой Онлайн-Магазин
+            My Online-shop
         </div>
         <div class='top-bl'>
             <div class='container'>
+               <a href='/' class='link1'>Home</a>
                 <div class='cart'>
                     {% with total_items=cart|length %}
                         {% if cart|length > 0 %}
-                            Ваша корзина:
+                            Cart:
                             <a href="{% url 'cart:CartDetail' %}">
-                                {{ total_items}} тов. {{ cart.get_total_price}} руб.
+                                {{ total_items}} prod. {{ cart.get_total_price}} $
                             </a>
                         {% else %}
-                            Корзина пустая
+                            The cart is empty
                         {% endif %}
                     {% endwith %}
                 </div>
